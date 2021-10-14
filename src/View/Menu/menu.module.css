@@ -1,0 +1,11 @@
+.menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.menu__item{
+    width: 60%;
+    margin-top: 1em;
+}

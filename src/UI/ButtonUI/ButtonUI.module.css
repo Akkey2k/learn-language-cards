@@ -1,0 +1,27 @@
+.button{
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: #2b2b2b;
+}
+
+.button .button__icon{
+    color: #ffffff;
+}
+
+.button .button__text{
+    color: #ffffff;
+    margin-left: 0.5em;
+}
+
+.button_white{
+    background-color: #ffffff;
+}
+
+.button.button_white .button__icon{
+    color: #2b2b2b;
+}
+
+.button.button_white .button__text{
+    color: #2b2b2b;
+    margin-left: 0.5em;
+}
