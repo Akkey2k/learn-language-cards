@@ -39,9 +39,9 @@ const Menu = observer(() => {
                 )}
             </div>
             <PopupUi header={"Добавить словарь"} active={VocabularyPopupStore.active} setActive={() => VocabularyPopupStore.setActive(false)}>
-                <form>
-                    <input type="text"/>
-                    <ButtonUi>
+                <form onSubmit={(e) => createVocabularyHandler(e)}>
+                    <input name={"vocabularyName"} type="text"/>
+                    <ButtonUi type={"submit"}>
                         Добавить
                     </ButtonUi>
                 </form>
@@ -65,6 +65,21 @@ const Menu = observer(() => {
 const editVocabularyHandler = (e, history, code) => {
     e.preventDefault()
     history.push(`/vocabulary/${code}`);
+}
+
+
+/**
+ * Обработчик формы для создания словаря
+ *
+ * @param e
+ */
+const createVocabularyHandler = (e) => {
+    e.preventDefault();
+
+    const input = e.target.querySelector("input");
+
+    VocabularyStore.addVocabulary(input.value);
+    VocabularyPopupStore.setActive(false)
 }
 
 export default Menu;

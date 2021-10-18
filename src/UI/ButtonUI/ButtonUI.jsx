@@ -1,34 +1,34 @@
 import React from 'react';
 
-import style from "./ButtonUI.module.css"
+import classes from "./ButtonUI.module.css"
 
-const ButtonUi = (props) => {
+const ButtonUi = ({variant, type, style, onClick, icon, hidden, children}) => {
     let buttonCls = "" // props.variant === "black" ?
 
-    switch(props.variant){
+    switch(variant){
         case "dark":
-            buttonCls = style.button;
+            buttonCls = classes.button;
             break;
         case "white":
-            buttonCls = style.button + " " + style.button_white;
+            buttonCls = classes.button + " " + classes.button_white;
             break;
         default:
-            buttonCls = style.button;
+            buttonCls = classes.button;
             break;
     }
 
-    if(!props.hidden){
+    if(!hidden){
         return (
-            <div style={props.style} className={buttonCls} onClick={props.onClick}>
-                <span className={props.icon + " " + style.button__icon}></span>
+            <button type={type} style={style} className={buttonCls} onClick={onClick}>
+                <span className={icon + " " + classes.button__icon}></span>
 
-                {props.children
+                {children
                     ?
-                    <span className={style.button__text}>{props.children}</span>
+                    <span className={classes.button__text}>{children}</span>
                     :
                     ""
                 }
-            </div>
+            </button>
         );
     }
     else{

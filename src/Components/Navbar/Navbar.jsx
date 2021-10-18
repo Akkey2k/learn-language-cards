@@ -68,8 +68,6 @@ const addButtonHandler = () => {
 
 const addNewVocabulary = () => {
     VocabularyPopupStore.setActive(true);
-
-    VocabularyStore.addVocabulary("Имя нового словаря");
 }
 
 const addNewVocabularyCard = () => {
