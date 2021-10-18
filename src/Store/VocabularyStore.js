@@ -20,6 +20,9 @@ class VocabularyStore {
         });
     }
 
+    /**
+     * @param {String} vocabularyName
+     */
     addVocabulary(vocabularyName) {
         this.data.push(
             {
@@ -28,6 +31,32 @@ class VocabularyStore {
                 cards: []
             }
         )
+    }
+
+    /**
+     * @param {Number} code
+     * @returns {Object}
+     */
+    getVocabularyByCode(code){
+        return this.data.filter(voc => voc.code === code)[0];
+    }
+
+    /**
+     * @param {Number} vocabularyCode
+     * @param {Object} cardData
+     */
+    addCardToVocabulary(vocabularyCode, cardData){
+        const vocabulary = this.getVocabularyByCode(vocabularyCode);
+        vocabulary.cards.push(cardData);
+    }
+
+    /**
+     * @param {Number} vocabularyCode
+     * @param {Number} cardCode
+     */
+    removeCardFromVocabulary(vocabularyCode, cardCode){
+        let vocabulary = this.getVocabularyByCode(vocabularyCode);
+        vocabulary.cards = vocabulary.cards.filter(card => card.code !== cardCode);
     }
 }
 

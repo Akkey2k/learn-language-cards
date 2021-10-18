@@ -23,9 +23,9 @@ const Menu = observer(() => {
     return (
         <div className={style.menu}>
             {vocs.map(voc =>
-                <Link key={voc.code} to={"/learn"} className={style.menu__item}>
+                <Link key={voc.code} to={`/learn/${voc.code}`} className={style.menu__item}>
                     <VocabularyUi word={voc.name} count={voc.cards.length}>
-                        <ButtonUi variant={"white"} style={EditButtonExtraStyle} onClick={(e) => editVocabularyHandler(e, history)} icon={"fas fa-pencil-alt"}/>
+                        <ButtonUi variant={"white"} style={EditButtonExtraStyle} onClick={(e) => editVocabularyHandler(e, history, voc.code)} icon={"fas fa-pencil-alt"}/>
                     </VocabularyUi>
                 </Link>
             )}
@@ -36,9 +36,18 @@ const Menu = observer(() => {
 
 // Methods
 
-const editVocabularyHandler = (e, history) => {
+/**
+ * Производит переход на страницу редактирования словаря
+ *
+ * @param e
+ * @param history
+ * @param code      код словаря
+ *
+ * @returns {void}
+ */
+const editVocabularyHandler = (e, history, code) => {
     e.preventDefault()
-    history.push("/vocabulary");
+    history.push(`/vocabulary/${code}`);
 }
 
 export default Menu;

@@ -1,0 +1,24 @@
+.word{
+    text-transform: capitalize;
+}
+
+.cardList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.imgThumb{
+    width: 5em;
+    height: 5em;
+
+    border-radius: 1em;
+    overflow: hidden;
+}
+
+.imgThumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

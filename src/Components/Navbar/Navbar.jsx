@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useHistory} from "react-router-dom";
 
 import VocabularyStore from "../../Store/VocabularyStore"
+import store from "store";
 
 import PanelUi from "../../UI/PanelUI";
 import ButtonUi from "../../UI/ButtonUI";
@@ -16,6 +17,7 @@ let ButtonUiExtraStyle = {
 
 const Navbar = (props) => {
     let history = useHistory();
+
     const [location, setLocation] = useState(history.location.pathname);
 
     history.listen((location, action) => {
@@ -29,7 +31,7 @@ const Navbar = (props) => {
             <PanelUi style={props.style}>
                 <ButtonUi hidden={isGoBackVisible} style={ButtonUiExtraStyle} icon={"fa fa-arrow-left"} onClick={() => history.goBack()}/>
 
-                <ButtonUi style={ButtonUiExtraStyle} icon={"fa fa-plus"} onClick={() => addButtonHandler(history.location.pathname)}>
+                <ButtonUi style={ButtonUiExtraStyle} icon={"fa fa-plus"} onClick={() => addButtonHandler()}>
                     Добавить
                 </ButtonUi>
             </PanelUi>
@@ -40,10 +42,11 @@ const Navbar = (props) => {
 // Methods
 
 /**
- * Определяет метод для выполнения по history.location.pathname
- * @param pathname
+ * Определяет метод для выполнения по URL
  */
-const addButtonHandler = (pathname) => {
+const addButtonHandler = () => {
+    let pathname = store.get("currentURL");
+
     switch (pathname) {
         case "/":
             console.log("/")
@@ -51,6 +54,7 @@ const addButtonHandler = (pathname) => {
             break;
         case "/vocabulary":
             console.log("/vocabulary")
+            addNewVocabularyCard()
             break;
         case "/learn":
             console.log("/learn")
@@ -64,6 +68,19 @@ const addNewVocabulary = () => {
     let vocabularyName = window.prompt("Введите название словаря:");
 
     VocabularyStore.addVocabulary(vocabularyName);
+}
+
+const addNewVocabularyCard = () => {
+    const selectedVocabulary = store.get("selectedVocabulary");
+
+    let cardData = {
+        code: Date.now(),
+        word: "pronounce",
+        description: "i know that word, but i dont remember how to ____ it",
+        imgSrc: "https://www.wikihow.com/images/thumb/e/e3/Pronounce-Wikipedia-Step-2-Version-2.jpg/v4-460px-Pronounce-Wikipedia-Step-2-Version-2.jpg.webp"
+    }
+
+    VocabularyStore.addCardToVocabulary(Number(selectedVocabulary.code), cardData);
 }
 
 export default Navbar;

@@ -11,10 +11,10 @@ const AppRouter = () => {
                 <Route exact path="/">
                     <Menu />
                 </Route>
-                <Route path="/vocabulary">
+                <Route path="/vocabulary/:vocabularyCode">
                     <Vocabulary/>
                 </Route>
-                <Route path="/learn">
+                <Route path="/learn/:vocabularyCode">
                     <Learn/>
                 </Route>
                 <Redirect to={"/"}/>
