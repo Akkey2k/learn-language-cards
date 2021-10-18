@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useHistory} from "react-router-dom";
 
-import store from "store";
+import VocabularyStore from "../../Store/VocabularyStore"
 
 import PanelUi from "../../UI/PanelUI";
 import ButtonUi from "../../UI/ButtonUI";
@@ -61,12 +61,9 @@ const addButtonHandler = (pathname) => {
 }
 
 const addNewVocabulary = () => {
-    const oldStore = store.get("vocabularyData");
-    store.set("vocabularyData", [{
-        code: Date.now(),
-        name: "Новый",
-        cards: []
-    }]);
+    let vocabularyName = window.prompt("Введите название словаря:");
+
+    VocabularyStore.addVocabulary(vocabularyName);
 }
 
 export default Navbar;
