@@ -1,0 +1,45 @@
+.popupWrapper {
+    background-color: rgba(0, 0, 0, 0.4);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    transition: .3s;
+    pointer-events: none;
+}
+
+.popupWrapper.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.popupInner {
+    padding: 1em;
+
+    border-radius: 1em;
+
+    background-color: #ffffff;
+
+    width: 50%;
+
+    transform: scale(0);
+    transition: .3s;
+}
+
+.popupInner.active {
+    transform: scale(1);
+}
+
+.popupHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

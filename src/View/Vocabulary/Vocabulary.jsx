@@ -2,13 +2,15 @@ import React from 'react';
 
 import {useParams} from "react-router-dom";
 import VocabularyStore from "../../Store/VocabularyStore";
+import CardPopupStore from "../../Store/Popup/CardPopupStore"
 import store from "store";
-import {observer} from "mobx-react-lite";
+import {observer, Observer} from "mobx-react-lite";
 
 import PanelUi from "../../UI/PanelUI/PanelUI";
 
 import style from "./Vocabulary.module.css"
 import ButtonUi from "../../UI/ButtonUI/ButtonUI";
+import PopupUi from "../../UI/PopupUI/PopupUI";
 
 const URL = "/vocabulary";
 
@@ -33,16 +35,29 @@ const Vocabulary = observer(() => {
     }
 
     return (
-        <div className={style.cardList}>
-            {selectedVocabulary.cards.map(card =>
-                <PanelUi key={card.code} style={wordPanelExtraStyle}>
-                    <span className={style.word}>{card.word}</span>
-                    <span className={style.word}>{card.description}</span>
+        <>
+            <div className={style.cardList}>
+                {selectedVocabulary.cards.map(card =>
+                    <PanelUi key={card.code} style={wordPanelExtraStyle}>
+                        <span className={style.word}>{card.word}</span>
+                        <span className={style.word}>{card.description}</span>
 
-                    <ButtonUi onClick={() => removeBtnHandler(vocabularyCode, Number(card.code))} style={removeBtnExtraStyle} icon={"fa fa-times"}/>
-                </PanelUi>
-            )}
-        </div>
+                        <ButtonUi onClick={() => removeBtnHandler(vocabularyCode, Number(card.code))} style={removeBtnExtraStyle} icon={"fa fa-times"}/>
+                    </PanelUi>
+                )}
+            </div>
+            <Observer>
+                {() => (
+                    <PopupUi header={"Добавить термин"} active={CardPopupStore.active} setActive={() => CardPopupStore.setActive(false)}>
+                        <form>
+                            <input type="text"/>
+                            <input type="text"/>
+                            <input type="text"/>
+                        </form>
+                    </PopupUi>
+                )}
+            </Observer>
+        </>
     );
 });
 

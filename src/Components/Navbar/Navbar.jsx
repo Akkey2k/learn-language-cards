@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {useHistory} from "react-router-dom";
 
 import VocabularyStore from "../../Store/VocabularyStore"
+import CardPopupStore from "../../Store/Popup/CardPopupStore"
+import VocabularyPopupStore from "../../Store/Popup/VocabularyPopupStore"
 import store from "store";
 
 import PanelUi from "../../UI/PanelUI";
@@ -65,13 +67,15 @@ const addButtonHandler = () => {
 }
 
 const addNewVocabulary = () => {
-    let vocabularyName = window.prompt("Введите название словаря:");
+    VocabularyPopupStore.setActive(true);
 
-    VocabularyStore.addVocabulary(vocabularyName);
+    VocabularyStore.addVocabulary("Имя нового словаря");
 }
 
 const addNewVocabularyCard = () => {
     const selectedVocabulary = store.get("selectedVocabulary");
+
+    CardPopupStore.setActive(true);
 
     let cardData = {
         code: Date.now(),
