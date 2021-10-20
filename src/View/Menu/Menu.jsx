@@ -12,6 +12,7 @@ import ButtonUi from "../../UI/ButtonUI/ButtonUI";
 
 import style from "./menu.module.css"
 import PopupUi from "../../UI/PopupUI/PopupUI";
+import InputUi from "../../UI/InputUI/InputUI";
 
 const EditButtonExtraStyle = {
     padding: 0.5 + "em",
@@ -39,9 +40,9 @@ const Menu = observer(() => {
                 )}
             </div>
             <PopupUi header={"Добавить словарь"} active={VocabularyPopupStore.active} setActive={() => VocabularyPopupStore.setActive(false)}>
-                <form onSubmit={(e) => createVocabularyHandler(e)}>
-                    <input name={"vocabularyName"} type="text"/>
-                    <ButtonUi type={"submit"}>
+                <form className={style.vocabularyForm} onSubmit={(e) => createVocabularyHandler(e)}>
+                    <InputUi className={style.vocabularyForm_input} name={"vocabularyName"} type={"text"}/>
+                    <ButtonUi icon={"fa fa-plus"} className={style.vocabularyForm_submit} type={"submit"}>
                         Добавить
                     </ButtonUi>
                 </form>
@@ -79,6 +80,8 @@ const createVocabularyHandler = (e) => {
     const input = e.target.querySelector("input");
 
     VocabularyStore.addVocabulary(input.value);
+
+    input.value = "";
     VocabularyPopupStore.setActive(false)
 }
 

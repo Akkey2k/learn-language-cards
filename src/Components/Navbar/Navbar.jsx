@@ -71,18 +71,7 @@ const addNewVocabulary = () => {
 }
 
 const addNewVocabularyCard = () => {
-    const selectedVocabulary = store.get("selectedVocabulary");
-
     CardPopupStore.setActive(true);
-
-    let cardData = {
-        code: Date.now(),
-        word: "pronounce",
-        description: "i know that word, but i dont remember how to ____ it",
-        imgSrc: "https://www.wikihow.com/images/thumb/e/e3/Pronounce-Wikipedia-Step-2-Version-2.jpg/v4-460px-Pronounce-Wikipedia-Step-2-Version-2.jpg.webp"
-    }
-
-    VocabularyStore.addCardToVocabulary(Number(selectedVocabulary.code), cardData);
 }
 
 export default Navbar;

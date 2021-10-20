@@ -11,6 +11,7 @@ import PanelUi from "../../UI/PanelUI/PanelUI";
 import style from "./Vocabulary.module.css"
 import ButtonUi from "../../UI/ButtonUI/ButtonUI";
 import PopupUi from "../../UI/PopupUI/PopupUI";
+import InputUi from "../../UI/InputUI/InputUI";
 
 const URL = "/vocabulary";
 
@@ -49,10 +50,16 @@ const Vocabulary = observer(() => {
             <Observer>
                 {() => (
                     <PopupUi header={"Добавить термин"} active={CardPopupStore.active} setActive={() => CardPopupStore.setActive(false)}>
-                        <form>
-                            <input type="text"/>
-                            <input type="text"/>
-                            <input type="text"/>
+                        <form className={style.vocabularyForm} onSubmit={(e) => createCardHandler(e)}>
+                            <InputUi name={"word"} placeholder={"Word"} className={style.vocabularyForm_input}/>
+                            <InputUi name={"description"} placeholder={"Description"} className={style.vocabularyForm_input}/>
+                            <InputUi name={"imgSrc"} placeholder={"Image url"} className={style.vocabularyForm_input}/>
+                            {/*<PanelUi className={style.vocabularyForm_pictures}>*/}
+                            {/*    dsf*/}
+                            {/*</PanelUi>*/}
+                            <ButtonUi icon={"fa fa-plus"} className={style.vocabularyForm_submit} type={"submit"}>
+                                Добавить
+                            </ButtonUi>
                         </form>
                     </PopupUi>
                 )}
@@ -61,8 +68,43 @@ const Vocabulary = observer(() => {
     );
 });
 
+/**
+ * Обработчик удаления карточки из словаря
+ *
+ * @param {Number} vocabularyCode    Код словаря
+ * @param {Number} cardCode          Код карточки
+ */
 const removeBtnHandler = (vocabularyCode, cardCode) => {
     VocabularyStore.removeCardFromVocabulary(vocabularyCode, cardCode);
+}
+
+/**
+ * Обработчик формы для создания карточки в словаре
+ *
+ * @param {Event} e
+ */
+const createCardHandler = e => {
+    e.preventDefault();
+
+    const selectedVocabulary = store.get("selectedVocabulary");
+
+    const inputs = e.target.querySelectorAll("input");
+
+    let cardData = {
+        code: Date.now(),
+    }
+
+    inputs.forEach(input => {
+        cardData[input.name] = input.value;
+    });
+
+    VocabularyStore.addCardToVocabulary(Number(selectedVocabulary.code), cardData);
+
+    inputs.forEach(input => {
+        input.value = "";
+    });
+
+    CardPopupStore.setActive(false);
 }
 
 export default Vocabulary;
