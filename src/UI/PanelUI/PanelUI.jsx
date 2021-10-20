@@ -1,11 +1,13 @@
 import React from 'react';
 
-import style from "./PanelUI.module.css"
+import cl from "./PanelUI.module.css"
 
-const PanelUi = (props) => {
+const PanelUi = ({style, className, children}) => {
+    let panelClasses = [className, cl.panel]
+
     return (
-        <div style={props.style} className={style.panel}>
-            {props.children}
+        <div style={style} className={panelClasses.join(" ")}>
+            {children}
         </div>
     );
 };

@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from "./ButtonUI.module.css"
 
-const ButtonUi = ({variant, type, style, onClick, icon, hidden, children}) => {
+const ButtonUi = ({variant, type, style, className, onClick, icon, hidden, children}) => {
     let buttonCls = "" // props.variant === "black" ?
 
     switch(variant){
@@ -19,7 +19,7 @@ const ButtonUi = ({variant, type, style, onClick, icon, hidden, children}) => {
 
     if(!hidden){
         return (
-            <button type={type} style={style} className={buttonCls} onClick={onClick}>
+            <button type={type} style={style} className={buttonCls + " " + className} onClick={onClick}>
                 <span className={icon + " " + classes.button__icon}></span>
 
                 {children
