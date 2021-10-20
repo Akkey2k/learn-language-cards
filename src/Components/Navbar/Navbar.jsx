@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {useHistory} from "react-router-dom";
 
-import VocabularyStore from "../../Store/VocabularyStore"
 import CardPopupStore from "../../Store/Popup/CardPopupStore"
 import VocabularyPopupStore from "../../Store/Popup/VocabularyPopupStore"
 import store from "store";
