@@ -13,7 +13,8 @@ import ButtonUi from "../../UI/ButtonUI/ButtonUI";
 import PopupUi from "../../UI/PopupUI/PopupUI";
 import InputUi from "../../UI/InputUI/InputUI";
 
-import classes from "./menu.module.css"
+
+import classes from "./menu.module.css";
 
 const EditButtonExtraStyle = {
     padding: 0.5 + "em " + 0.7 + "em",
