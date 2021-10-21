@@ -1,11 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {useParams} from "react-router-dom";
 import VocabularyStore from "../../Store/VocabularyStore";
 import store from "store";
 import CardPopup from "../../Components/CardPopup/CardPopup";
+import CardUi from "../../UI/CardUI/CardUI";
+
+import classes from "./Learn.module.css";
+import PanelUi from "../../UI/PanelUI/PanelUI";
+import ButtonUi from "../../UI/ButtonUI/ButtonUI";
 
 const URL = "/learn";
+
+const DefaultCardData = {
+    code: Date.now(),
+    description: "Вернитесь обратно и добавьте карточки для изучения",
+    imgSrc: "https://bumper-stickers.ru/30160-thickbox_default/grustnyy-smaylik.jpg",
+    word: "Карточки для изучения отсутствуют :( Тыкни на меня",
+};
 
 const Learn = () => {
     let {vocabularyCode} = useParams();
@@ -15,9 +27,68 @@ const Learn = () => {
     store.set("selectedVocabulary", selectedVocabulary);
     store.set("currentURL", URL);
 
+    let [activeCard, setActiveCard] = useState(0);
+
+    let cardsData = selectedVocabulary.cards;
+    let cardData = cardsData[activeCard];
+
+    if(!cardData){
+        cardData = DefaultCardData
+    }
+
+    let [isPrevBtnDisabled, setPrevBtnDisabled] = useState(activeCard === 0);
+    let [isNextBtnDisabled, setNextBtnDisabled] = useState(activeCard === cardsData.length);
+
+    /**
+     * Переключает активную карточку
+     *
+     * @param {String} way   Направление prev\next
+     */
+    const changeCardHandler = (way) => {
+        const cardsCount = cardsData.length;
+        switch (way) {
+            case "prev":
+                if(activeCard !== 0) {
+                    setPrevBtnDisabled(false);
+                    setNextBtnDisabled(false);
+
+                    setActiveCard(activeCard-=1)
+
+                    if(activeCard === 0){
+                        setPrevBtnDisabled(true);
+                    }
+                }
+                else{
+                    setPrevBtnDisabled(true);
+                }
+                break;
+            case "next":
+                if(activeCard !== cardsCount - 1) {
+                    setNextBtnDisabled(false);
+                    setPrevBtnDisabled(false);
+
+                    setActiveCard(activeCard+=1)
+
+                    if(activeCard === cardsCount - 1){
+                        setNextBtnDisabled(true);
+                    }
+                }
+                else{
+                    setNextBtnDisabled(true);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     return (
         <div>
-            Learn
+            <CardUi className={classes.card} cardData={cardData}/>
+            <PanelUi className={classes.cardChanger}>
+                <ButtonUi disabled={isPrevBtnDisabled} onClick={() => changeCardHandler("prev")} className={classes.btnPrev} icon={"fa fa-chevron-left"}/>
+                <ButtonUi disabled={isNextBtnDisabled} onClick={() => changeCardHandler("next")} className={classes.btnNext} icon={"fa fa-chevron-right"}/>
+            </PanelUi>
             <CardPopup/>
         </div>
     );

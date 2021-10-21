@@ -7,6 +7,11 @@
     outline: none;
 }
 
+.button_disabled {
+    background-color: #b1b1b1;
+    cursor: default;
+}
+
 .button .button__icon{
     color: #ffffff;
 }
