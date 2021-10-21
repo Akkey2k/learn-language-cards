@@ -5,6 +5,7 @@
 
     border: none;
     outline: none;
+    transition: .3s;
 }
 
 .button_disabled {

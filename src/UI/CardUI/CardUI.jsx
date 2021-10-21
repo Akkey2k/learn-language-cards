@@ -13,7 +13,7 @@ import classes from "./CardUI.module.css"
  */
 const CardUi = ({className, style, cardData}) => {
     let {word, description, imgSrc} = cardData;
-    const [isFlipped, setFlipped] = useState(false);
+    const [isFlipped, setFlipped] = useState(true);
 
     let cardClasses = [className, classes.card];
 

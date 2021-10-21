@@ -3,20 +3,22 @@ import React from 'react';
 import {useHistory} from "react-router";
 import {Link} from "react-router-dom";
 import {observer} from "mobx-react-lite";
+
 import VocabularyStore from "../../Store/VocabularyStore";
 import VocabularyPopupStore from "../../Store/Popup/VocabularyPopupStore";
 import store from "store";
 
 import VocabularyUi from "../../UI/VocabularyUI";
 import ButtonUi from "../../UI/ButtonUI/ButtonUI";
-
-import style from "./menu.module.css"
 import PopupUi from "../../UI/PopupUI/PopupUI";
 import InputUi from "../../UI/InputUI/InputUI";
 
+import classes from "./menu.module.css"
+
 const EditButtonExtraStyle = {
-    padding: 0.5 + "em",
+    padding: 0.5 + "em " + 0.7 + "em",
     borderRadius: 0.3 + "em",
+    marginLeft: 1 + "em"
 }
 
 const URL = "/";
@@ -30,19 +32,20 @@ const Menu = observer(() => {
 
     return (
         <>
-            <div className={style.menu}>
+            <div className={classes.menu}>
                 {vocs.map(voc =>
-                    <Link key={voc.code} to={`/learn/${voc.code}`} className={style.menu__item}>
+                    <Link key={voc.code} to={`/learn/${voc.code}`} className={classes.menu__item}>
                         <VocabularyUi word={voc.name} count={voc.cards.length}>
                             <ButtonUi variant={"white"} style={EditButtonExtraStyle} onClick={(e) => editVocabularyHandler(e, history, voc.code)} icon={"fas fa-pencil-alt"}/>
+                            <ButtonUi variant={"white"} style={EditButtonExtraStyle} onClick={(e) => removeVocabularyHandler(e, voc.code)} icon={"fas fa-trash"}/>
                         </VocabularyUi>
                     </Link>
                 )}
             </div>
             <PopupUi header={"Добавить словарь"} active={VocabularyPopupStore.active} setActive={() => VocabularyPopupStore.setActive(false)}>
-                <form className={style.vocabularyForm} onSubmit={(e) => createVocabularyHandler(e)}>
-                    <InputUi className={style.vocabularyForm_input} name={"vocabularyName"} type={"text"}/>
-                    <ButtonUi icon={"fa fa-plus"} className={style.vocabularyForm_submit} type={"submit"}>
+                <form className={classes.vocabularyForm} onSubmit={(e) => createVocabularyHandler(e)}>
+                    <InputUi className={classes.vocabularyForm_input} name={"vocabularyName"} type={"text"}/>
+                    <ButtonUi icon={"fa fa-plus"} className={classes.vocabularyForm_submit} type={"submit"}>
                         Добавить
                     </ButtonUi>
                 </form>
@@ -66,6 +69,18 @@ const Menu = observer(() => {
 const editVocabularyHandler = (e, history, code) => {
     e.preventDefault()
     history.push(`/vocabulary/${code}`);
+}
+
+
+/**
+ * Удаляет словарь
+ *
+ * @param e
+ * @param code
+ */
+const removeVocabularyHandler = (e, code) => {
+    e.preventDefault();
+    VocabularyStore.removeVocabulary(code);
 }
 
 

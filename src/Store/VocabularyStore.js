@@ -34,6 +34,13 @@ class VocabularyStore {
     }
 
     /**
+     * @param {Number} vocabularyCode
+     */
+    removeVocabulary(vocabularyCode){
+        this.data = this.data.filter(voc => voc.code !== vocabularyCode);
+    }
+
+    /**
      * @param {Number} code
      * @returns {Object}
      */

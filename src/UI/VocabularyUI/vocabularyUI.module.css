@@ -10,16 +10,15 @@
 
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 }
 
 .vocabulary__text{
-    min-width: 70%;
-    max-width: 70%;
     font-size: 2em;
     line-height: 1.3em;
     color: #ffffff;
+    margin-right: auto;
 
     text-overflow: ellipsis;
     overflow: hidden;
@@ -28,4 +27,6 @@
 .vocabulary__counter{
     font-size: 1em;
     color: #ffffff;
+
+    margin-right: 3em;
 }
