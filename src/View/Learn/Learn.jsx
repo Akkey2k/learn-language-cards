@@ -3,6 +3,7 @@ import React from 'react';
 import {useParams} from "react-router-dom";
 import VocabularyStore from "../../Store/VocabularyStore";
 import store from "store";
+import CardPopup from "../../Components/CardPopup/CardPopup";
 
 const URL = "/learn";
 
@@ -16,7 +17,8 @@ const Learn = () => {
 
     return (
         <div>
-           Learn
+            Learn
+            <CardPopup/>
         </div>
     );
 };

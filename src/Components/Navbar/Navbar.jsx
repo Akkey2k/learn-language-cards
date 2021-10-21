@@ -59,6 +59,7 @@ const addButtonHandler = () => {
             break;
         case "/learn":
             console.log("/learn")
+            addNewVocabularyCard()
             break;
         default:
             break;
