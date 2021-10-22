@@ -1,8 +1,10 @@
 import React from 'react';
+
+import {Switch, Route, Redirect} from "react-router-dom";
+
 import Menu from "./View/Menu";
 import Vocabulary from "./View/Vocabulary";
-import {Switch, Route, Redirect} from "react-router-dom";
-import Learn from "./View/Learn/Learn";
+import Learn from "./View/Learn";
 
 const AppRouter = () => {
     return (

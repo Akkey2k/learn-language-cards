@@ -3,12 +3,13 @@ import React, {useState} from 'react';
 import {useParams} from "react-router-dom";
 import VocabularyStore from "../../Store/VocabularyStore";
 import store from "store";
+
 import CardPopup from "../../Components/CardPopup/CardPopup";
 import CardUi from "../../UI/CardUI/CardUI";
-
-import classes from "./Learn.module.css";
 import PanelUi from "../../UI/PanelUI/PanelUI";
 import ButtonUi from "../../UI/ButtonUI/ButtonUI";
+
+import cl from "./Learn.module.css";
 
 const URL = "/learn";
 
@@ -84,10 +85,10 @@ const Learn = () => {
 
     return (
         <div>
-            <CardUi className={classes.card} cardData={cardData}/>
-            <PanelUi className={classes.cardChanger}>
-                <ButtonUi disabled={isPrevBtnDisabled} onClick={() => changeCardHandler("prev")} className={classes.btnPrev} icon={"fa fa-chevron-left"}/>
-                <ButtonUi disabled={isNextBtnDisabled} onClick={() => changeCardHandler("next")} className={classes.btnNext} icon={"fa fa-chevron-right"}/>
+            <CardUi className={cl.card} cardData={cardData}/>
+            <PanelUi className={cl.cardChanger}>
+                <ButtonUi disabled={isPrevBtnDisabled} onClick={() => changeCardHandler("prev")} className={cl.btnPrev} icon={"fa fa-chevron-left"}/>
+                <ButtonUi disabled={isNextBtnDisabled} onClick={() => changeCardHandler("next")} className={cl.btnNext} icon={"fa fa-chevron-right"}/>
             </PanelUi>
             <CardPopup/>
         </div>

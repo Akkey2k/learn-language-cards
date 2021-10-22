@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import classes from "./CardUI.module.css"
+import cl from "./CardUI.module.css"
 
 /**
  *
@@ -15,25 +15,25 @@ const CardUi = ({className, style, cardData}) => {
     let {word, description, imgSrc} = cardData;
     const [isFlipped, setFlipped] = useState(true);
 
-    let cardClasses = [className, classes.card];
+    let cardClasses = [className, cl.card];
 
     if(isFlipped){
-        cardClasses.push(classes.card_clicked)
+        cardClasses.push(cl.card_clicked)
     }
 
     return (
         <div onClick={() => setFlipped(!isFlipped)} className={cardClasses.join(" ")} style={style}>
-            <div className={classes.front}>
-                <div className={classes.cardWord}>
+            <div className={cl.front}>
+                <div className={cl.cardWord}>
                     {word}
                 </div>
             </div>
-            <div className={classes.back}>
-                <div className={classes.cardDescription}>
+            <div className={cl.back}>
+                <div className={cl.cardDescription}>
                     {description}
                 </div>
-                <div className={classes.cardImg}>
-                    <img className={classes.cardImg} src={imgSrc} alt={word}/>
+                <div className={cl.cardImg}>
+                    <img className={cl.cardImg} src={imgSrc} alt={word}/>
                 </div>
             </div>
         </div>

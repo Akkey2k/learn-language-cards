@@ -8,8 +8,7 @@ import store from "store";
 import PanelUi from "../../UI/PanelUI";
 import ButtonUi from "../../UI/ButtonUI";
 
-
-import style from "./Navbar.module.css"
+import cl from "./Navbar.module.css"
 
 let ButtonUiExtraStyle = {
     padding: 1 + "em",
@@ -28,7 +27,7 @@ const Navbar = (props) => {
     const isGoBackVisible = location === "/";
 
     return (
-        <div className={style.navbar}>
+        <div className={cl.navbar}>
             <PanelUi style={props.style}>
                 <ButtonUi hidden={isGoBackVisible} style={ButtonUiExtraStyle} icon={"fa fa-arrow-left"} onClick={() => history.goBack()}/>
 

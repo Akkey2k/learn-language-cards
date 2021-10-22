@@ -13,8 +13,7 @@ import ButtonUi from "../../UI/ButtonUI/ButtonUI";
 import PopupUi from "../../UI/PopupUI/PopupUI";
 import InputUi from "../../UI/InputUI/InputUI";
 
-
-import classes from "./menu.module.css";
+import cl from "./menu.module.css";
 
 const EditButtonExtraStyle = {
     padding: 0.5 + "em " + 0.7 + "em",
@@ -33,9 +32,9 @@ const Menu = observer(() => {
 
     return (
         <>
-            <div className={classes.menu}>
+            <div className={cl.menu}>
                 {vocs.map(voc =>
-                    <Link key={voc.code} to={`/learn/${voc.code}`} className={classes.menu__item}>
+                    <Link key={voc.code} to={`/learn/${voc.code}`} className={cl.menu__item}>
                         <VocabularyUi word={voc.name} count={voc.cards.length}>
                             <ButtonUi variant={"white"} style={EditButtonExtraStyle} onClick={(e) => editVocabularyHandler(e, history, voc.code)} icon={"fas fa-pencil-alt"}/>
                             <ButtonUi variant={"white"} style={EditButtonExtraStyle} onClick={(e) => removeVocabularyHandler(e, voc.code)} icon={"fas fa-trash"}/>
@@ -44,9 +43,9 @@ const Menu = observer(() => {
                 )}
             </div>
             <PopupUi header={"Добавить словарь"} active={VocabularyPopupStore.active} setActive={() => VocabularyPopupStore.setActive(false)}>
-                <form className={classes.vocabularyForm} onSubmit={(e) => createVocabularyHandler(e)}>
-                    <InputUi className={classes.vocabularyForm_input} name={"vocabularyName"} type={"text"}/>
-                    <ButtonUi icon={"fa fa-plus"} className={classes.vocabularyForm_submit} type={"submit"}>
+                <form className={cl.vocabularyForm} onSubmit={(e) => createVocabularyHandler(e)}>
+                    <InputUi className={cl.vocabularyForm_input} name={"vocabularyName"} type={"text"}/>
+                    <ButtonUi icon={"fa fa-plus"} className={cl.vocabularyForm_submit} type={"submit"}>
                         Добавить
                     </ButtonUi>
                 </form>

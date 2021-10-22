@@ -10,7 +10,7 @@ import InputUi from "../../UI/InputUI/InputUI";
 import ButtonUi from "../../UI/ButtonUI/ButtonUI";
 import PanelUi from "../../UI/PanelUI/PanelUI";
 
-import classes from "./CardPopup.module.css";
+import cl from "./CardPopup.module.css";
 
 const ACCESS_KEY = process.env.REACT_APP_UNSPLASH_API_KEY;
 
@@ -103,21 +103,21 @@ const CardPopup = () => {
             {() => (
                 <PopupUi header={"Добавить термин"} active={CardPopupStore.active}
                          setActive={() => CardPopupStore.setActive(false)}>
-                    <form className={classes.vocabularyForm} onSubmit={(e) => createCardHandler(e)}>
-                        <InputUi name={"word"} placeholder={"Word"} className={classes.vocabularyForm_input} onChange={(e) => searchPhotoHandler(e.target.value)}/>
+                    <form className={cl.vocabularyForm} onSubmit={(e) => createCardHandler(e)}>
+                        <InputUi name={"word"} placeholder={"Word"} className={cl.vocabularyForm_input} onChange={(e) => searchPhotoHandler(e.target.value)}/>
                         <InputUi name={"description"} placeholder={"Description"}
-                                 className={classes.vocabularyForm_input}/>
-                        <PanelUi className={classes.vocabularyForm_pictures}>
+                                 className={cl.vocabularyForm_input}/>
+                        <PanelUi className={cl.vocabularyForm_pictures}>
                             {
                                 photos
                                 ?
                                 photos.map(photo =>
                                     chosenPhoto === photo ?
-                                        <div key={photo} onClick={() => choosePhotoHandler(photo)} className={[classes.vocabularyForm_photo, classes.vocabularyForm_photo_active].join(" ")}>
+                                        <div key={photo} onClick={() => choosePhotoHandler(photo)} className={[cl.vocabularyForm_photo, cl.vocabularyForm_photo_active].join(" ")}>
                                             <img src={photo} alt={wordForFetchPhoto}/>
                                         </div>
                                         :
-                                    <div key={photo} onClick={() => choosePhotoHandler(photo)} className={classes.vocabularyForm_photo}>
+                                    <div key={photo} onClick={() => choosePhotoHandler(photo)} className={cl.vocabularyForm_photo}>
                                         <img src={photo} alt={wordForFetchPhoto}/>
                                     </div>
                                 )
@@ -125,7 +125,7 @@ const CardPopup = () => {
                                 "Фото не найдено"
                             }
                         </PanelUi>
-                        <ButtonUi icon={"fa fa-plus"} className={classes.vocabularyForm_submit} type={"submit"}>
+                        <ButtonUi icon={"fa fa-plus"} className={cl.vocabularyForm_submit} type={"submit"}>
                             Добавить
                         </ButtonUi>
                     </form>

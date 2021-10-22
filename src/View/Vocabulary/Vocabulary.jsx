@@ -10,7 +10,7 @@ import PanelUi from "../../UI/PanelUI/PanelUI";
 import ButtonUi from "../../UI/ButtonUI/ButtonUI";
 import CardPopup from "../../Components/CardPopup";
 
-import style from "./Vocabulary.module.css"
+import cl from "./Vocabulary.module.css"
 
 const URL = "/vocabulary";
 
@@ -36,11 +36,11 @@ const Vocabulary = observer(() => {
 
     return (
         <>
-            <div className={style.cardList}>
+            <div className={cl.cardList}>
                 {selectedVocabulary.cards.map(card =>
                     <PanelUi key={card.code} style={wordPanelExtraStyle}>
-                        <span className={style.word}>{card.word}</span>
-                        <span className={style.word}>{card.description}</span>
+                        <span className={cl.word}>{card.word}</span>
+                        <span className={cl.word}>{card.description}</span>
 
                         <ButtonUi onClick={() => removeBtnHandler(vocabularyCode, Number(card.code))} style={removeBtnExtraStyle} icon={"fa fa-times"}/>
                     </PanelUi>

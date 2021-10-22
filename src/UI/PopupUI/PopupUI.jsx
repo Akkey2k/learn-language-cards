@@ -1,6 +1,6 @@
 import React from 'react';
 
-import style from "./PopupUI.module.css"
+import cl from "./PopupUI.module.css"
 import ButtonUi from "../ButtonUI/ButtonUI";
 
 const closeBtnExtraStyle = {
@@ -10,9 +10,9 @@ const closeBtnExtraStyle = {
 
 const PopupUi = ({active, setActive, header, children}) => {
     return (
-        <div className={active ? style.popupWrapper + ` ${style.active}` : style.popupWrapper}>
-            <div className={active ? style.popupInner + ` ${style.active}` : style.popupInner}>
-                <div className={style.popupHeader}>
+        <div className={active ? cl.popupWrapper + ` ${cl.active}` : cl.popupWrapper}>
+            <div className={active ? cl.popupInner + ` ${cl.active}` : cl.popupInner}>
+                <div className={cl.popupHeader}>
                     {header || ""}
                     <ButtonUi style={closeBtnExtraStyle} icon={"fa fa-times"} onClick={() => setActive(false)}/>
                 </div>

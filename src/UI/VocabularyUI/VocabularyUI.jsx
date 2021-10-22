@@ -1,20 +1,20 @@
 import React from 'react';
 
-import style from "./vocabularyUI.module.css";
+import cl from "./vocabularyUI.module.css";
 
-const VocabularyUi = (props) => {
-    const counterWord = getCounterWord(props.count);
+const VocabularyUi = ({count, style, word, children}) => {
+    const counterWord = getCounterWord(count);
 
     return (
-        <div style={props.style} className={style.vocabulary}>
-            <span className={style.vocabulary__text}>{props.word}</span>
+        <div style={style} className={cl.vocabulary}>
+            <span className={cl.vocabulary__text}>{word}</span>
 
-            <span className={style.vocabulary__counter}>
-                {props.count}
+            <span className={cl.vocabulary__counter}>
+                {count}
                 {counterWord}
             </span>
 
-            {props.children}
+            {children}
         </div>
     );
 };
@@ -25,7 +25,7 @@ const VocabularyUi = (props) => {
 /**
  * Возвращает корректное слово для кол-ва терминов
  *
- * @param count
+ * @param {Number} count
  * @returns {string}
  */
 const getCounterWord = (count) => {
