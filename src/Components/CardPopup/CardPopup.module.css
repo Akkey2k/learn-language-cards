@@ -51,3 +51,8 @@
     padding: 0.6em 1.5em;
     width: auto;
 }
+
+.vocabularyForm_picturesMobile .vocabularyForm_photo{
+    width: calc(50% - 1em);
+    height: 5em;
+}

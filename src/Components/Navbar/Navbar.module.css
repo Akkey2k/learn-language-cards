@@ -3,5 +3,13 @@
     justify-content: center;
     align-items: flex-start;
 
-    width: 100%;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 1em;
+}
+
+.navbarMobile {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 1em;
 }

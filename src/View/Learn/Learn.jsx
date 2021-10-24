@@ -10,6 +10,7 @@ import PanelUi from "../../UI/PanelUI/PanelUI";
 import ButtonUi from "../../UI/ButtonUI/ButtonUI";
 
 import cl from "./Learn.module.css";
+import {useMediaQuery} from "react-responsive";
 
 const URL = "/learn";
 
@@ -83,10 +84,20 @@ const Learn = () => {
         }
     }
 
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
+
+    let cardClasses = [cl.card];
+    let cardChangerClasses = [cl.cardChanger];
+
+    if(isTabletOrMobile) {
+        cardClasses.push(cl.cardMobile)
+        cardChangerClasses.push(cl.cardChangerMobile)
+    }
+
     return (
         <div>
-            <CardUi className={cl.card} cardData={cardData}/>
-            <PanelUi className={cl.cardChanger}>
+            <CardUi className={cardClasses.join(" ")} cardData={cardData}/>
+            <PanelUi className={cardChangerClasses.join(" ")}>
                 <ButtonUi disabled={isPrevBtnDisabled} onClick={() => changeCardHandler("prev")} className={cl.btnPrev} icon={"fa fa-chevron-left"}/>
                 <ButtonUi disabled={isNextBtnDisabled} onClick={() => changeCardHandler("next")} className={cl.btnNext} icon={"fa fa-chevron-right"}/>
             </PanelUi>

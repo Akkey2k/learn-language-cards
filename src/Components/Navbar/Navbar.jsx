@@ -9,13 +9,14 @@ import PanelUi from "../../UI/PanelUI";
 import ButtonUi from "../../UI/ButtonUI";
 
 import cl from "./Navbar.module.css"
+import { useMediaQuery } from 'react-responsive'
 
 let ButtonUiExtraStyle = {
     padding: 1 + "em",
     marginRight: 1 + "em"
 }
 
-const Navbar = (props) => {
+const Navbar = ({style, className}) => {
     let history = useHistory();
 
     const [location, setLocation] = useState(history.location.pathname);
@@ -26,9 +27,20 @@ const Navbar = (props) => {
 
     const isGoBackVisible = location === "/";
 
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
+
+    let navbarClasses = [className];
+
+    if(isTabletOrMobile) {
+        navbarClasses.push(cl.navbarMobile)
+    }
+    else{
+        navbarClasses.push(cl.navbar)
+    }
+
     return (
-        <div className={cl.navbar}>
-            <PanelUi style={props.style}>
+        <div className={navbarClasses.join(" ")}>
+            <PanelUi style={style}>
                 <ButtonUi hidden={isGoBackVisible} style={ButtonUiExtraStyle} icon={"fa fa-arrow-left"} onClick={() => history.goBack()}/>
 
                 <ButtonUi style={ButtonUiExtraStyle} icon={"fa fa-plus"} onClick={() => addButtonHandler()}>

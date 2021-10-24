@@ -11,6 +11,7 @@ import ButtonUi from "../../UI/ButtonUI/ButtonUI";
 import PanelUi from "../../UI/PanelUI/PanelUI";
 
 import cl from "./CardPopup.module.css";
+import {useMediaQuery} from "react-responsive";
 
 const ACCESS_KEY = process.env.REACT_APP_UNSPLASH_API_KEY;
 
@@ -20,6 +21,13 @@ const CardPopup = () => {
     const [photos, setPhotos] = useState(null);
     const [chosenPhoto, setChosenPhoto] = useState("");
 
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
+
+    let picturesPanelClasses = [cl.vocabularyForm_pictures];
+
+    if(isTabletOrMobile){
+        picturesPanelClasses.push(cl.vocabularyForm_picturesMobile)
+    }
 
     useEffect(() => {
         const URL = `https://api.unsplash.com/search/photos?page=1&query=${wordForFetchPhoto}&client_id=${ACCESS_KEY}`;
@@ -107,7 +115,7 @@ const CardPopup = () => {
                         <InputUi name={"word"} placeholder={"Word"} className={cl.vocabularyForm_input} onChange={(e) => searchPhotoHandler(e.target.value)}/>
                         <InputUi name={"description"} placeholder={"Description"}
                                  className={cl.vocabularyForm_input}/>
-                        <PanelUi className={cl.vocabularyForm_pictures}>
+                        <PanelUi className={picturesPanelClasses.join(" ")}>
                             {
                                 photos
                                 ?

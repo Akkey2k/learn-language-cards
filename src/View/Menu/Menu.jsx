@@ -14,6 +14,7 @@ import PopupUi from "../../UI/PopupUI/PopupUI";
 import InputUi from "../../UI/InputUI/InputUI";
 
 import cl from "./menu.module.css";
+import {useMediaQuery} from "react-responsive";
 
 const EditButtonExtraStyle = {
     padding: 0.5 + "em " + 0.7 + "em",
@@ -30,11 +31,18 @@ const Menu = observer(() => {
 
     const vocs = VocabularyStore.data;
 
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
+
+    let vocabularyClasses = [cl.menu__item];
+    if(isTabletOrMobile) {
+        vocabularyClasses.push(cl.menu__itemMobile)
+    }
+
     return (
         <>
             <div className={cl.menu}>
                 {vocs.map(voc =>
-                    <Link key={voc.code} to={`/learn/${voc.code}`} className={cl.menu__item}>
+                    <Link key={voc.code} to={`/learn/${voc.code}`} className={vocabularyClasses.join(" ")}>
                         <VocabularyUi word={voc.name} count={voc.cards.length}>
                             <ButtonUi variant={"white"} style={EditButtonExtraStyle} onClick={(e) => editVocabularyHandler(e, history, voc.code)} icon={"fas fa-pencil-alt"}/>
                             <ButtonUi variant={"white"} style={EditButtonExtraStyle} onClick={(e) => removeVocabularyHandler(e, voc.code)} icon={"fas fa-trash"}/>

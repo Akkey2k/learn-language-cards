@@ -11,6 +11,7 @@ import ButtonUi from "../../UI/ButtonUI/ButtonUI";
 import CardPopup from "../../Components/CardPopup";
 
 import cl from "./Vocabulary.module.css"
+import {useMediaQuery} from "react-responsive";
 
 const URL = "/vocabulary";
 
@@ -34,13 +35,25 @@ const Vocabulary = observer(() => {
         borderRadius: 0.5 + "em"
     }
 
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1024px)' })
+
+    if(isTabletOrMobile) {
+        wordPanelExtraStyle.width = 90 + "%"
+    }
+
     return (
         <>
             <div className={cl.cardList}>
                 {selectedVocabulary.cards.map(card =>
                     <PanelUi key={card.code} style={wordPanelExtraStyle}>
                         <span className={cl.word}>{card.word}</span>
-                        <span className={cl.word}>{card.description}</span>
+
+                        {
+                            isTabletOrMobile ?
+                            ""
+                            :
+                            <span className={cl.word}>{card.description}</span>
+                        }
 
                         <ButtonUi onClick={() => removeBtnHandler(vocabularyCode, Number(card.code))} style={removeBtnExtraStyle} icon={"fa fa-times"}/>
                     </PanelUi>
